@@ -1,0 +1,26 @@
+[
+    {
+        "name": "ahmed",
+        "age": 18,
+        "country": "egypt",
+        "married": false
+    },
+    {
+        "name": "mahmoud",
+        "age": 22,
+        "country": "spain",
+        "married": true
+    },
+    {
+        "name": "dalia",
+        "age": 20,
+        "country": "france",
+        "married": false
+    },
+    {
+        "name": "menna",
+        "age": 17,
+        "country": "sudan",
+        "married": false
+    }
+]
