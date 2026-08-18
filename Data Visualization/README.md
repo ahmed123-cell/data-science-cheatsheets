@@ -10,7 +10,7 @@ This folder focuses on learning how to create clear, styled, and informative cha
 
 | File | Overview |
 |---|---|
-| `data_setup.py` | Generates/loads the datasets (random data + built-in datasets like `tips`, `iris`, `penguins`) used across both notebooks. Run this first before the tutorials. |
+| `data_setup.py` | Generates/loads the datasets (random data) used across both notebooks. Run this first before the tutorials. |
 | `matplotlib_tutorial.ipynb` | Core Matplotlib plots — line charts, bar charts, pie charts, stack plots, fill_between, histograms, scatter plots, box plots, violin plots, and heatmaps. |
 | `seaborn_tutorial.ipynb` | Core Seaborn plots — line, bar, scatter, histogram, KDE, box, violin, strip/swarm, heatmap, and regression (`lmplot`) plots, with built-in styling and statistical features. |
 
@@ -21,7 +21,7 @@ This folder focuses on learning how to create clear, styled, and informative cha
    pip install matplotlib seaborn pandas numpy jupyter notebook
    ```
 
-4. Open `matplotlib_tutorial.ipynb` or `seaborn_tutorial.ipynb` and run the cells (`Shift + Enter`) to see each plot rendered instantly.
+2. Open `matplotlib_tutorial.ipynb` or `seaborn_tutorial.ipynb` and run the cells (`Shift + Enter`) to see each plot rendered instantly.
 
 ## 🧠 What You'll Find in Each Notebook
 
