@@ -581,3 +581,8 @@ For Data Analytics and Data Engineering roles, focus on mastering:
 8. Query Optimization
 
 These topics appear frequently in real projects and technical interviews.
+---
+
+## 📚 Resources
+
+- [PostgreSQL Tutorial — W3Schools](https://www.w3schools.com/postgresql/index.php)

@@ -118,3 +118,8 @@
 ## Ⓜ️ dbt macro setup
 
 ##### Can find the apply of macro in ```macro/calculate_customer_revenue```
+----
+
+## 📚 Resources
+
+- [dbt](https://youtu.be/us1rf2iynOY?si=jyRr8H6H7HFgJqYk)
