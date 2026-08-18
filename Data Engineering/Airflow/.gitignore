@@ -1,0 +1,18 @@
+# Python virtual environments
+venv/
+.venv/
+env/
+ENV/
+**/venv/
+**/.venv/
+**/env/
+**/airflow_venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Airflow
+**/logs/
+airflow.cfg
+airflow.db

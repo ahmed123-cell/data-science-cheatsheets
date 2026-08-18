@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Cleaned customers dimension
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+
+  - name: stg_orders
+    description: Cleaned orders with proper timestamps
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: customer_id
+        tests: [not_null]
+
+  - name: stg_order_items
+    description: Order items with calculated values
+    columns:
+      - name: order_id
+        tests: [not_null]
+      - name: product_id
+        tests: [not_null]
+      - name: price
+        tests: 
+          - not_null
+          - positive_values
+
+  - name: stg_payments
+    description: Payments data
+    columns:
+      - name: order_id
+        tests: [not_null]
+      - name: payment_value
+        tests: 
+          - not_null
+          - positive_values 
+
+  - name: stg_products
+    columns:
+      - name: product_id
+        tests: [not_null]
