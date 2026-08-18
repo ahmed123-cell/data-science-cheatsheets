@@ -19,7 +19,7 @@
 
 ## 📖 About This Repo
 
-This repository is my **personal Data Science reference library** — a growing collection of notes, cheat sheets, and hands-on notebooks covering everything from Python basics to Machine Learning and MLOps.
+This repository is my **personal Data Science reference library** — a growing collection of notes, cheat sheets, and hands-on notebooks covering everything from Python basics to Machine Learning, MLOps, and the core Business concepts that give data its real-world context.
 
 > 🎯 **Goal:** Build a single, well-organized place to quickly look things up, refresh concepts, and reference working code — instead of re-searching the same things over and over.
 
@@ -43,6 +43,7 @@ A suggested learning path through this repo, from foundations to advanced topics
  9️⃣  Deep Learning             →  Neural networks & advanced modeling
  🔟  MLOps                     →  Deploy, monitor & maintain ML in production
  📊  Power BI                  →  Turn insights into dashboards & reports
+ 💼  Business                  →  Understand the business, sales, marketing & finance context behind the data
 ```
 
 ```mermaid
@@ -57,6 +58,7 @@ flowchart LR
     H --> I[🧠 Deep Learning]
     I --> J[⚙️ MLOps]
     D --> K[📊 Power BI]
+    A --> L[💼 Business]
 ```
 
 ---
@@ -76,6 +78,7 @@ flowchart LR
 | 🧠 **Deep Learning** | Neural networks and deep learning fundamentals. |
 | ⚙️ **MLOps** | Deploying, monitoring, and maintaining machine learning models in production. |
 | 📊 **Power BI** | Building interactive dashboards and reports, plus DAX formulas. |
+| 💼 **Business** | Key concepts and definitions in **Business**, **Sales**, **Marketing**, and **Finance** — the context needed to turn data insights into business decisions. |
 
 ---
 
