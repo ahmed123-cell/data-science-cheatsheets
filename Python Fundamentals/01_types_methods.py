@@ -115,6 +115,7 @@ print(list1.index(1)) # --> 0
 # insert(): add an element to a list at a specific index
 list1= [1, 3, 4]
 list1.insert(1, 2) # --> [1, 2, 3, 4]
+print(list1)
 
 # pop(): return the last element in the list
 list1= [1, 2, 3, 4]
