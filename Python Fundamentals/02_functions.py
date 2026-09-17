@@ -8,7 +8,7 @@ greet("ahmed") # Call the function. --> Hello ahmed
 def add(a, b):
     return a + b
 
-print(add(2, 3)) # Call the function. --> 8
+print(add(2, 3)) # Call the function. --> 5
 #-----------------------------------------------------------------------------------------------------------
 # Default Parameter
 def say_hello(name='Guest'):
