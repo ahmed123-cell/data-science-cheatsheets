@@ -2,3 +2,7 @@
 *project_1.pbix
 **/job_postings_flat.csv
 **Azure ML.pdf
+
+06_Data_Engineering/dbt/dbt_project/dev.duckdb
+
+Deep Learning/Deep Learning Fundamentals/Data/FashionMNIST/raw/
