@@ -6,3 +6,5 @@
 06_Data_Engineering/dbt/dbt_project/dev.duckdb
 
 Deep Learning/Deep Learning Fundamentals/Data/FashionMNIST/raw/
+# Large reference files
+MLOps/Incoming/Azure ML.pdf
