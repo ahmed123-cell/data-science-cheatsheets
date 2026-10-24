@@ -1,10 +1,15 @@
-# 🏗️ Databases & SQL for Data Analytics and Data Engineering
+# 05 SQL & Relational Databases for Data Analytics & Engineering
 
-A structured study guide covering database fundamentals, SQL, and the concepts that matter most for data analyst and data engineer roles.
+> **Module Focus:** SQL Syntax · Joins & Aggregations · Window Functions · Common Table Expressions (CTEs) · Database Design & Normalization · Transactions & Indexing
+>
+> 📁 **Companion Script:** All queries are implemented and executable in [`sql_tutorial.sql`](./sql_tutorial.sql) (600+ lines of annotated SQL).
 
 ---
 
 ## 📚 Table of Contents
+
+**Part 0: Practical Code**
+- [SQL Tutorial Script (600+ lines)](#sql-tutorial)
 
 **Part 1: Foundations**
 1. [Introduction to Databases](#intro)
@@ -37,6 +42,18 @@ A structured study guide covering database fundamentals, SQL, and the concepts t
 18. [Interview Cheat Sheet](#cheatsheet)
 19. [Final Advice](#advice)
 20. [Resources](#resources)
+
+---
+
+<a id="sql-tutorial"></a>
+## 🚀 Practical Companion: `sql_tutorial.sql`
+
+The file [`sql_tutorial.sql`](./sql_tutorial.sql) provides a 600-line comprehensive reference covering:
+- **Querying Basics:** `SELECT`, `DISTINCT`, `WHERE`, `AND/OR/NOT`, `LIKE`, `IN`, `BETWEEN`, `NULL` checks.
+- **Sorting & Aggregations:** `ORDER BY`, `LIMIT/OFFSET`, `GROUP BY`, `HAVING`, `COUNT`, `SUM`, `AVG`, `MIN`, `MAX`.
+- **Joins:** `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, `FULL OUTER JOIN`, `CROSS JOIN`, `SELF JOIN`.
+- **Advanced SQL:** Window Functions (`ROW_NUMBER()`, `RANK()`, `DENSE_RANK()`, `LEAD()`, `LAG()`, `OVER(PARTITION BY ... ORDER BY ...)`), Subqueries, Common Table Expressions (`WITH ... AS`), `UNION` vs `UNION ALL`, `CASE WHEN`.
+- **Data Definition & Manipulation:** `CREATE TABLE`, `ALTER TABLE`, `DROP`, `TRUNCATE`, `INSERT`, `UPDATE`, `DELETE`.
 
 ---
 

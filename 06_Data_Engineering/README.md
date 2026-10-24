@@ -1,89 +1,67 @@
-# 🗄️ Data Engineering Concepts Explained
+# 06 Data Engineering: Modern ELT, Orchestration & Pipelines
 
-## ETL vs ELT ⚖️
-
-- **ETL (Extract, Transform, Load)**: Process where data is **extracted** from sources, **transformed** (cleaned, enriched, aggregated) in a staging area, then **loaded** into the target system (usually a Data Warehouse).
-- **ELT (Extract, Load, Transform)**: Data is **extracted** and **loaded** raw into the target (Data Lake/Warehouse), then **transformed** inside the powerful target system.
-- **Key Difference**: ETL transforms **before** loading (traditional, good for structured data). ELT loads first then transforms (modern, scalable for big data).
-
-**When to use**:
-- ETL: Legacy systems, strict compliance, limited target compute.
-- ELT: Cloud data platforms (Snowflake, BigQuery, Databricks) with massive compute power.
+> **Module Focus:** Data Storage Architectures · ETL vs. ELT · Data Modeling (Star & Snowflake) · Apache Airflow · dbt (Data Build Tool) · Batch vs. Streaming
 
 ---
 
-## Data Storage Architectures 🏗️
+## 📖 Overview
 
-- **Data Warehouse**: Centralized repository for **structured, processed data** optimized for analytics and BI reporting. Schema-on-write (highly organized).
-- **Data Lake**: Repository for **raw, unstructured/semi-structured data** at scale (schema-on-read). Stores everything cheaply (logs, images, JSON, etc.).
-- **Data Lakehouse**: Modern hybrid combining **Data Lake** (cheap storage + variety) + **Data Warehouse** (ACID transactions, schema enforcement, SQL analytics). Examples: Databricks, Delta Lake.
+Data Engineering is the practice of designing, building, and maintaining reliable systems that collect, clean, transform, and deliver data at scale. This module bridges high-level architecture principles with **hands-on production tooling** featuring **Apache Airflow** and **dbt**.
 
-**Summary**: Warehouse = Clean & Fast queries | Lake = Cheap & Flexible | Lakehouse = Best of both.
+```mermaid
+flowchart LR
+    Sources["Raw Data Sources\n(PostgreSQL, APIs, Logs)"] --> Extraction["Extract & Load (ELT)"]
+    Extraction --> Storage["Storage Lakehouse / Warehouse\n(DuckDB, Snowflake, S3)"]
+    Storage --> DBT["Transform with dbt\n(Bronze -> Silver -> Gold)"]
+    DBT --> Analytics["Analytics & BI Ready\n(Power BI, ML Features)"]
 
----
-
-## Data Pipelines & Orchestration 🔄
-
-- **Data Pipeline**: Automated workflow that moves and processes data from source to destination (includes extraction, transformation, loading).
-- **Orchestration**: Managing and coordinating multiple pipelines, tasks, and dependencies (e.g., "run this after that succeeds").
-- **Scheduling**: Defining **when** pipelines should run (cron jobs, every hour, daily at midnight, event-triggered).
-
-**Popular Tools**:
-- Orchestration: Apache Airflow, Dagster, Prefect, Luigi.
-- Scheduling: Built into orchestrators or cron, Kubernetes CronJobs.
+    Orch["Apache Airflow\n(Workflow Orchestration)"] -.->|Schedules & Monitors| Extraction
+    Orch -.->|Triggers| DBT
+```
 
 ---
 
-## Data Quality, Lineage & Observability 👀
+## 🛠️ Hands-on Tooling Implementations
 
-- **Data Quality**: Ensures data is **accurate, complete, consistent, timely, and valid**. Includes validation rules, monitoring for anomalies, and cleansing.
-- **Data Lineage**: Tracks the **full journey** of data — where it came from, how it was transformed, and where it went (like a family tree for data).
-- **Observability**: Comprehensive monitoring of pipelines, including logs, metrics, traces, alerts for failures, performance, and data freshness.
-
-**Why they matter**: Prevent "garbage in, garbage out", debug issues faster, and maintain trust in data.
-
----
-
-## Batch vs Stream Processing ⚡
-
-- **Batch Processing**: Processing data in **large chunks** at scheduled intervals (e.g., hourly or daily jobs). Efficient for high-volume, non-time-sensitive data.
-- **Stream Processing**: Processing data **in real-time** as it arrives (event-by-event). Ideal for live analytics, monitoring, and low-latency applications.
-
-**Examples**:
-- Batch: Nightly sales reports (Spark, Hadoop).
-- Stream: Fraud detection, live dashboards (Kafka + Flink, Spark Streaming).
+### 1. [Airflow/ — Workflow Orchestration](./Airflow)
+* **What it does:** Orchestrates and schedules data extraction, validation, and loading pipelines as Directed Acyclic Graphs (DAGs).
+* **Stack:** Full Docker Compose setup running Airflow Webserver (port `8080`), Scheduler, Celery Workers, Redis broker, and PostgreSQL metadata backend.
+* **Guide:** See [`Airflow/README.md`](./Airflow/README.md) for startup commands, DAG anatomy, and environment variables.
 
 ---
 
-## Data Modeling 🧱
-
-- **Data Modeling**: Designing the structure and relationships of data for efficient storage, querying, and analysis.
-  - **Star Schema**: Simple model with a central **Fact Table** (metrics) surrounded by **Dimension Tables** (descriptive context). Easy to understand and fast for queries.
-  - **Snowflake Schema**: Normalized version of Star Schema where Dimension Tables are further broken into sub-tables. Saves storage but more complex joins.
-  - **Fact & Dimension Tables**: 
-    - **Fact Tables**: Contain measurable, quantitative data (e.g., sales amount, quantity).
-    - **Dimension Tables**: Contain descriptive attributes (e.g., customer details, product info, time).
-
----
-
-## Partitioning & Clustering 📂
-
-- **Partitioning**: Dividing large tables into smaller, manageable parts based on a column (e.g., by date or region) to improve query speed and maintenance.
-- **Clustering**: Organizing data within partitions based on similar values (e.g., clustering by customer_id) for even better performance on frequent filters.
-
-**Benefit**: Dramatically reduces scanned data in queries (especially in Data Lakes/Lakehouses).
+### 2. [dbt/ — Modern Analytics Engineering](./dbt)
+* **What it does:** The industry standard for **in-warehouse transformations (ELT)**. Writes modular SQL models with built-in version control, documentation, and automated testing.
+* **Stack:** `dbt-core` with `DuckDB` local fast OLAP engine.
+* **Includes:**
+  * Seed data: `df_Orders.csv`, `df_OrderItems.csv`, `df_Products.csv`, `df_Customers.csv`, `df_Payments.csv`.
+  * Dimensional Modeling: Staging layer (`stg_orders`, `stg_customers`), Dimension tables (`dim_customers`, `dim_products`), and Fact tables (`fct_orders`).
+* **Guide:** See [`dbt/README.md`](./dbt/README.md) for dbt CLI commands (`dbt run`, `dbt test`, `dbt docs generate`).
 
 ---
 
-## Data Governance & Advanced Concepts 🛡️
+## 📚 Core Theoretical Concepts
 
-- **Data Governance**: Policies, standards, and processes to ensure data is **secure, compliant, high-quality**, and properly managed across the organization.
-- **CDC (Change Data Capture)**: Technique to detect and capture changes (inserts, updates, deletes) in source systems in real-time or near real-time.
-- **Data Contracts**: Formal agreements defining the schema, semantics, and expectations of data between producers and consumers.
-- **Data Mesh**: Decentralized architecture where domain teams own their data products (treat data as a product).
-- **Medallion Architecture**: Layered data organization (Bronze → Silver → Gold) in Data Lakes/Lakehouses:
-  - **Bronze**: Raw data.
-  - **Silver**: Cleaned & enriched.
-  - **Gold**: Aggregated & business-ready for consumption.
+### 1. ETL vs. ELT ⚖️
+- **ETL (Extract, Transform, Load):** Data is transformed in a staging area *before* loading into the target warehouse. Used in legacy systems, on-premises databases, and when target compute is limited.
+- **ELT (Extract, Load, Transform):** Raw data is loaded directly into modern cloud data warehouses (Snowflake, BigQuery, Databricks, DuckDB), leveraging massive cloud compute to transform data in-place using SQL/dbt.
 
----
+### 2. Storage Architectures: Lake vs. Warehouse vs. Lakehouse 🏗️
+- **Data Warehouse (OLAP):** Structured, processed, highly governed data. Schema-on-write. Optimized for fast BI aggregations.
+- **Data Lake:** Raw, unstructured, semi-structured, and structured data stored cheaply (e.g. AWS S3, Azure ADLS). Schema-on-read.
+- **Data Lakehouse:** Modern hybrid combining low-cost flexible object storage with ACID transactions, versioning, and fast SQL engines (e.g. Databricks Delta Lake, Apache Iceberg).
+
+### 3. Dimensional Modeling: Star vs. Snowflake Schema 🧱
+- **Fact Tables:** Contain numerical measurements and transaction events (e.g., `order_amount`, `quantity_sold`, `discount`).
+- **Dimension Tables:** Contain descriptive context and attributes (e.g., `customer_name`, `product_category`, `store_location`).
+- **Star Schema:** Denormalized. Fact table surrounded by flat dimension tables. Fewest joins, fastest query performance.
+- **Snowflake Schema:** Normalized. Dimensions broken into sub-tables (e.g., `products` $\to$ `categories` $\to$ `departments`). Saves storage, requires more joins.
+
+### 4. Medallion Architecture (Bronze $\to$ Silver $\to$ Gold) 🥇
+- **Bronze (Raw):** Exact raw copy of source records (appended history).
+- **Silver (Cleansed):** Deduplicated, schema-validated, filtered, and enriched.
+- **Gold (Aggregated):** Business-level aggregations, dimensional marts ready for BI and ML models.
+
+### 5. Data Quality, Contracts & Lineage 🛡️
+- **Data Contracts:** Formal agreements specifying schema, data types, freshness, and nullability between data producers and downstream consumers.
+- **Data Lineage:** Complete visual audit trail tracking data provenance from raw source tables to final executive dashboard metrics.

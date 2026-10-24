@@ -1,0 +1,42 @@
+# DVC Pipeline Specification (dvc.yaml)
+# Connects Code + Data + Parameters + Metrics into a reproducible Directed Acyclic Graph (DAG)
+
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+      - src/prepare.py
+      - data/raw/rides_raw.csv
+    params:
+      - prepare.val_ratio
+      - prepare.random_seed
+      - prepare.min_trip_distance
+      - prepare.max_trip_distance
+    outs:
+      - data/processed/train.parquet
+      - data/processed/val.parquet
+
+  train:
+    cmd: python src/train_mlflow.py
+    deps:
+      - src/train_mlflow.py
+      - data/processed/train.parquet
+    params:
+      - train.model_type
+      - train.alpha
+      - train.fit_intercept
+      - train.experiment_name
+    outs:
+      - models/pipeline.joblib
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - models/pipeline.joblib
+      - data/processed/val.parquet
+    params:
+      - evaluate.target_max_mae
+    metrics:
+      - metrics.json:
+          cache: false

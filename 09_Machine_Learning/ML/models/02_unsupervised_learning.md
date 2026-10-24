@@ -1,22 +1,74 @@
-# Unsupervised Learning
+# 🔍 Unsupervised Learning
 
-A structured guide to dimensionality reduction and clustering algorithms.
+A structured guide to dimensionality reduction and clustering algorithms: methods that find structure in **unlabeled data**, with no target variable to predict.
 
-## Contents
+<a id="contents"></a>
+## 📚 Contents
 
-- [Dimension Reduction in Machine Learning 📉](#dimension-reduction-in-machine-learning-)
-- [K-Means Clustering in Machine Learning 🔀](#k-means-clustering-in-machine-learning-)
-- [Hierarchical Clustering in Machine Learning 🌳](#hierarchical-clustering-in-machine-learning-)
-- [DBSCAN in Machine Learning 🟢](#dbscan-in-machine-learning-)
+**Part 1: Dimensionality Reduction**
+
+1. [Dimension Reduction 📉](#dr)
+   - [What is Dimensionality Reduction? 🤔](#dr-what-is-dimensionality-reduction)
+   - [Principal Component Analysis (PCA) 🔄](#dr-principal-component-analysis-pca)
+   - [Other Dimensionality Reduction Algorithms](#dr-other-dimensionality-reduction-algorithms)
+      - [t-SNE (t-Distributed Stochastic Neighbor Embedding) 🌀](#dr-t-sne-t-distributed-stochastic-neighbor-embedding)
+      - [UMAP (Uniform Manifold Approximation and Projection) 🌌](#dr-umap-uniform-manifold-approximation-and-projection)
+      - [LDA (Linear Discriminant Analysis) 🎯](#dr-lda-linear-discriminant-analysis)
+      - [LLE (Locally Linear Embedding) 🔗](#dr-lle-locally-linear-embedding)
+   - [Quick Comparison](#dr-quick-comparison)
+   - [When to Use Dimensionality Reduction? 💡](#dr-when-to-use-dimensionality-reduction)
+
+**Part 2: Clustering**
+
+2. [K-Means Clustering 🔀](#kmeans)
+   - [What is K-Means? 🤖](#kmeans-what-is-k-means)
+   - [How Does K-Means Work? ⚙️](#kmeans-how-does-k-means-work)
+   - [Important Considerations ⚠️](#kmeans-important-considerations)
+   - [Advantages ✅](#kmeans-advantages)
+   - [Disadvantages ❌](#kmeans-disadvantages)
+   - [Quick Summary 🎯](#kmeans-quick-summary)
+
+3. [Hierarchical Clustering 🌳](#hc)
+   - [What is Hierarchical Clustering? 🤝](#hc-what-is-hierarchical-clustering)
+   - [How Does Hierarchical Clustering Work? 🔄](#hc-how-does-hierarchical-clustering-work)
+   - [The Merging Process (Linkage Criteria)](#hc-the-merging-process-linkage-criteria)
+   - [Dendrogram Visualization 📊](#hc-dendrogram-visualization)
+   - [Advantages ✅](#hc-advantages)
+   - [Disadvantages ❌](#hc-disadvantages)
+   - [Quick Summary 🎯](#hc-quick-summary)
+
+4. [DBSCAN 🟢](#dbscan)
+   - [What is DBSCAN? 🔍](#dbscan-what-is-dbscan)
+   - [How Does DBSCAN Work? ⚙️](#dbscan-how-does-dbscan-work)
+   - [Parameters ⚙️](#dbscan-parameters)
+   - [Advantages ✅](#dbscan-advantages)
+   - [Disadvantages ❌](#dbscan-disadvantages)
+   - [Quick Comparison with Other Clustering Algorithms](#dbscan-quick-comparison-with-other-clustering-algorithms)
 
 ---
 
-## Dimension Reduction in Machine Learning 📉
+## 🧭 Algorithms at a Glance
+
+| # | Algorithm | Family | Core idea | Typical use |
+|---|-----------|--------|-----------|-------------|
+| 1 | [Dimension Reduction](#dr) (PCA, t-SNE, UMAP, LDA, LLE) | Dimensionality reduction | Cut the number of features while preserving as much important information as possible | Visualization, removing noise, preprocessing for other models |
+| 2 | [K-Means](#kmeans) | Clustering (centroid-based) | Assign points to the nearest of K centroids, then update centroids to the cluster mean | Customer segmentation, image compression |
+| 3 | [Hierarchical Clustering](#hc) | Clustering (hierarchical) | Build a tree of clusters by merging or splitting; cut the dendrogram where you want | Gene expression analysis, document clustering |
+| 4 | [DBSCAN](#dbscan) | Clustering (density-based) | Grow clusters from dense regions and mark sparse points as noise | Anomaly detection, spatial data |
+
+---
+
+<a id="dr"></a>
+## 1. Dimension Reduction 📉
+
+<a id="dr-what-is-dimensionality-reduction"></a>
+### What is Dimensionality Reduction? 🤔
 
 **Dimensionality Reduction** refers to techniques that reduce the number of input features (dimensions) while preserving as much important information as possible. It helps with the **Curse of Dimensionality**, improves model performance, reduces computation time, and enables visualization of high-dimensional data.
 
 ---
 
+<a id="dr-principal-component-analysis-pca"></a>
 ### Principal Component Analysis (PCA) 🔄
 
 **PCA** is the most popular linear dimensionality reduction technique. It transforms the original features into a new set of **uncorrelated variables** called **Principal Components**, ordered by the amount of variance they explain.
@@ -62,8 +114,10 @@ A structured guide to dimensionality reduction and clustering algorithms.
 
 ---
 
+<a id="dr-other-dimensionality-reduction-algorithms"></a>
 ### Other Dimensionality Reduction Algorithms
 
+<a id="dr-t-sne-t-distributed-stochastic-neighbor-embedding"></a>
 #### t-SNE (t-Distributed Stochastic Neighbor Embedding) 🌀
 **t-SNE** is a **non-linear** technique primarily used for **visualization** (reducing to 2D or 3D).
 
@@ -75,6 +129,7 @@ A structured guide to dimensionality reduction and clustering algorithms.
 **Best for**: Exploring clusters and manifolds in data.  
 **Drawbacks**: Not great for new data (no explicit mapping), computationally expensive, and results can vary between runs.
 
+<a id="dr-umap-uniform-manifold-approximation-and-projection"></a>
 #### UMAP (Uniform Manifold Approximation and Projection) 🌌
 **UMAP** is a modern, fast, and scalable **non-linear** technique that often produces better visualizations than t-SNE while preserving more global structure.
 
@@ -85,6 +140,7 @@ A structured guide to dimensionality reduction and clustering algorithms.
 
 **Strengths**: Better at preserving both local and global structure, faster, and consistent.
 
+<a id="dr-lda-linear-discriminant-analysis"></a>
 #### LDA (Linear Discriminant Analysis) 🎯
 **LDA** is a **supervised** dimensionality reduction technique.
 
@@ -95,6 +151,7 @@ A structured guide to dimensionality reduction and clustering algorithms.
 
 **Best when**: You have labeled data and want to maximize discrimination between classes.
 
+<a id="dr-lle-locally-linear-embedding"></a>
 #### LLE (Locally Linear Embedding) 🔗
 **LLE** is a **non-linear** manifold learning method.
 
@@ -107,6 +164,7 @@ A structured guide to dimensionality reduction and clustering algorithms.
 
 ---
 
+<a id="dr-quick-comparison"></a>
 ### Quick Comparison
 
 | Technique | Type       | Supervised | Best For                  | Speed     |
@@ -119,16 +177,21 @@ A structured guide to dimensionality reduction and clustering algorithms.
 
 ---
 
+<a id="dr-when-to-use-dimensionality-reduction"></a>
 ### When to Use Dimensionality Reduction? 💡
 - Before training complex models on high-dimensional data
 - For data visualization
 - To remove noise and multicollinearity
 - As a preprocessing step for distance-based algorithms (like KNN)
 
+[↑ Back to contents](#contents)
+
 ---
 
-## K-Means Clustering in Machine Learning 🔀
+<a id="kmeans"></a>
+## 2. K-Means Clustering 🔀
 
+<a id="kmeans-what-is-k-means"></a>
 ### What is K-Means? 🤖
 
 **K-Means** is one of the simplest and most popular **unsupervised** machine learning algorithms used for **clustering**. 
@@ -144,6 +207,7 @@ It groups similar data points together into **K clusters** (where K is a number 
 
 ---
 
+<a id="kmeans-how-does-k-means-work"></a>
 ### How Does K-Means Work? ⚙️
 
 K-Means is an **iterative algorithm** that follows these steps:
@@ -177,6 +241,7 @@ Where $\mu_i$ is the centroid of cluster $C_i$.
 
 ---
 
+<a id="kmeans-important-considerations"></a>
 ### Important Considerations ⚠️
 
 - **Choosing the right K**: Use the **Elbow Method** (plot WCSS vs K and look for the "elbow" point) or **Silhouette Score**.
@@ -188,11 +253,13 @@ Where $\mu_i$ is the centroid of cluster $C_i$.
 
 ---
 
+<a id="kmeans-advantages"></a>
 ### Advantages ✅
 - Simple and easy to understand
 - Very fast and scalable to large datasets
 - Easy to implement and interpret
 
+<a id="kmeans-disadvantages"></a>
 ### Disadvantages ❌
 - Must specify K in advance
 - Sensitive to outliers (they can pull centroids)
@@ -202,14 +269,19 @@ Where $\mu_i$ is the centroid of cluster $C_i$.
 
 ---
 
+<a id="kmeans-quick-summary"></a>
 ### Quick Summary 🎯
 
 **K-Means** is a fast, intuitive clustering algorithm that partitions data into K groups by iteratively assigning points to the nearest centroid and updating centroids to the cluster mean. While simple, it remains a go-to algorithm for many real-world clustering tasks and serves as a strong baseline.
 
+[↑ Back to contents](#contents)
+
 ---
 
-## Hierarchical Clustering in Machine Learning 🌳
+<a id="hc"></a>
+## 3. Hierarchical Clustering 🌳
 
+<a id="hc-what-is-hierarchical-clustering"></a>
 ### What is Hierarchical Clustering? 🤝
 
 **Hierarchical Clustering** is an **unsupervised** machine learning algorithm that builds a hierarchy of clusters. Unlike K-Means, it does **not require** you to specify the number of clusters in advance. 
@@ -225,6 +297,7 @@ Instead, it creates a tree-like structure called a **dendrogram**, which shows h
 
 ---
 
+<a id="hc-how-does-hierarchical-clustering-work"></a>
 ### How Does Hierarchical Clustering Work? 🔄
 
 There are two main approaches:
@@ -242,6 +315,7 @@ There are two main approaches:
 
 ---
 
+<a id="hc-the-merging-process-linkage-criteria"></a>
 ### The Merging Process (Linkage Criteria)
 
 The key decision in hierarchical clustering is **how to measure the distance between two clusters** (not just individual points). Common linkage methods include:
@@ -260,6 +334,7 @@ The key decision in hierarchical clustering is **how to measure the distance bet
 
 ---
 
+<a id="hc-dendrogram-visualization"></a>
 ### Dendrogram Visualization 📊
 
 The result of hierarchical clustering is a **dendrogram** — a tree diagram that shows:
@@ -270,12 +345,14 @@ You can cut the dendrogram horizontally at any height to obtain a specific numbe
 
 ---
 
+<a id="hc-advantages"></a>
 ### Advantages ✅
 - No need to specify number of clusters beforehand
 - Provides a complete hierarchy (great for interpretation)
 - Works with any distance metric
 - Can reveal nested structures in data
 
+<a id="hc-disadvantages"></a>
 ### Disadvantages ❌
 - Computationally expensive (usually $O(n^3)$ or $O(n^2)$ time) → not ideal for very large datasets
 - Once a merge is done, it cannot be undone (greedy algorithm)
@@ -284,16 +361,21 @@ You can cut the dendrogram horizontally at any height to obtain a specific numbe
 
 ---
 
+<a id="hc-quick-summary"></a>
 ### Quick Summary 🎯
 
 **Hierarchical Clustering** builds a tree of clusters either by merging smaller ones (agglomerative) or splitting larger ones (divisive). It gives you maximum flexibility through the dendrogram and is excellent when you want to explore the natural grouping structure of your data at multiple levels of granularity.
 
 It pairs very well with K-Means — you can use hierarchical clustering to decide the optimal number of clusters for K-Means.
 
+[↑ Back to contents](#contents)
+
 ---
 
-## DBSCAN in Machine Learning 🟢
+<a id="dbscan"></a>
+## 4. DBSCAN 🟢
 
+<a id="dbscan-what-is-dbscan"></a>
 ### What is DBSCAN? 🔍
 
 **DBSCAN** (Density-Based Spatial Clustering of Applications with Noise) is a powerful **unsupervised** clustering algorithm that groups data points based on **density**.
@@ -312,6 +394,7 @@ Unlike K-Means or Hierarchical Clustering, DBSCAN:
 
 ---
 
+<a id="dbscan-how-does-dbscan-work"></a>
 ### How Does DBSCAN Work? ⚙️
 
 DBSCAN works by analyzing the **local density** of points. It classifies each point into one of three categories:
@@ -343,6 +426,7 @@ The algorithm grows clusters by connecting dense regions and marks sparse areas 
 
 ---
 
+<a id="dbscan-parameters"></a>
 ### Parameters ⚙️
 
 - **ε (epsilon)**: The maximum distance between two points to be considered neighbors.
@@ -354,12 +438,14 @@ The algorithm grows clusters by connecting dense regions and marks sparse areas 
 
 ---
 
+<a id="dbscan-advantages"></a>
 ### Advantages ✅
 - Excellent at handling **noise and outliers**
 - Can find clusters with **complex, non-convex shapes**
 - No need to specify number of clusters
 - Works well with varying density (to some extent)
 
+<a id="dbscan-disadvantages"></a>
 ### Disadvantages ❌
 - Sensitive to the choice of ε and MinPts
 - Struggles with clusters of **vastly different densities**
@@ -368,6 +454,7 @@ The algorithm grows clusters by connecting dense regions and marks sparse areas 
 
 ---
 
+<a id="dbscan-quick-comparison-with-other-clustering-algorithms"></a>
 ### Quick Comparison with Other Clustering Algorithms
 
 | Algorithm      | Needs K? | Shape     | Handles Noise | Arbitrary Shapes |
@@ -375,3 +462,5 @@ The algorithm grows clusters by connecting dense regions and marks sparse areas 
 | K-Means        | Yes      | Spherical | Poor          | No               |
 | Hierarchical   | No       | Varies    | Moderate      | Moderate         |
 | DBSCAN         | No       | Any       | Excellent     | Yes              |
+
+[↑ Back to contents](#contents)

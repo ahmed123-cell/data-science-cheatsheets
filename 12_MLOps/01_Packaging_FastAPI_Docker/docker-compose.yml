@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  inference-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ride-duration-api:latest
+    container_name: mlops_inference_service
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - LOG_LEVEL=INFO
+      - MODEL_BACKEND=sklearn
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: mlops_prediction_cache
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3

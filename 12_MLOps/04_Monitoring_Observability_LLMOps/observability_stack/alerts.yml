@@ -1,0 +1,38 @@
+# Prometheus Alerting Rules (alerts.yml)
+# High-priority alerts worth waking up an engineer for
+
+groups:
+  - name: mlops_critical_alerts
+    rules:
+      # Alert 1: High P95 Latency Degradation
+      - alert: ModelInferenceHighLatency
+        expr: histogram_quantile(0.95, sum(rate(ml_inference_duration_seconds_bucket[5m])) by (le)) > 0.250
+        for: 2m
+        labels:
+          severity: critical
+          tier: serving
+        annotations:
+          summary: "Model inference P95 latency exceeds 250ms"
+          description: "P95 latency is currently {{ $value }}s on service {{ $labels.service }}."
+
+      # Alert 2: High Prediction Error Rate (HTTP 5xx)
+      - alert: ModelServingErrorRateSpike
+        expr: sum(rate(ml_prediction_requests_total{status=~"5.."}[5m])) / sum(rate(ml_prediction_requests_total[5m])) * 100 > 1.0
+        for: 1m
+        labels:
+          severity: page
+          tier: serving
+        annotations:
+          summary: "Inference 5xx error rate exceeds 1%"
+          description: "Error rate is currently {{ $value }}%."
+
+      # Alert 3: Statistical Data Drift Spike
+      - alert: SignificantFeatureDriftDetected
+        expr: ml_feature_drift_psi_score > 0.20
+        for: 10m
+        labels:
+          severity: warning
+          tier: data
+        annotations:
+          summary: "Population Stability Index (PSI) exceeds 0.20 threshold"
+          description: "Significant data drift observed. Triggering automated retraining pipeline."

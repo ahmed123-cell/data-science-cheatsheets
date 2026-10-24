@@ -1,0 +1,1 @@
+{"columns": ["PULocationID", "DOLocationID", "trip_distance", "passenger_count", "hour_of_day", "day_of_week"], "data": [[153, 198, 2.36, 1, 8, 5], [30, 204, 1.06, 1, 12, 2], [128, 109, 1.85, 3, 10, 0]]}

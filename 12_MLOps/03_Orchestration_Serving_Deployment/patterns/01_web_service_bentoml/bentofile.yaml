@@ -1,0 +1,13 @@
+service: "service:RideDurationService"
+labels:
+  owner: mlops-team
+  project: ride-duration-serving
+python:
+  packages:
+    - bentoml>=1.2.0
+    - numpy>=1.26.0
+    - pydantic>=2.6.0
+    - scikit-learn>=1.4.0
+include:
+  - "service.py"
+  - "bentofile.yaml"

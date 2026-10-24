@@ -1,147 +1,106 @@
-# 📊 Big Data Explained
+# 08 Big Data: Distributed Computing with Hadoop & Apache Spark
 
-A concise guide to Big Data, Hadoop, and Apache Spark.
-
-## 📑 Table of Contents
-
-1. [What is Big Data?](#1-what-is-big-data)
-2. [The 4 Vs of Big Data](#2-the-4-vs-of-big-data)
-3. [Hadoop](#3-hadoop)
-4. [Apache Spark](#4-apache-spark)
-5. [Hadoop vs Spark](#5-hadoop-vs-spark)
-6. [Summary](#6-summary)
+> **Module Focus:** Distributed Systems · The 5 Vs · HDFS & YARN · Apache Spark & PySpark · In-Memory Computing · Batch vs. Real-Time Streaming
 
 ---
 
-## 1. What is Big Data?
+## 📖 Overview
 
-**Big Data** refers to extremely large, complex, and fast-growing datasets that cannot be efficiently processed or analyzed using traditional tools and methods (like Excel or traditional relational databases).
+When datasets exceed the memory (RAM) and storage capacity of a single machine, traditional data science tools (Pandas, Scikit-Learn) throw `OutOfMemoryError` exceptions. **Big Data distributed computing** solves this by partitioning datasets across a cluster of commodity servers, processing workloads in parallel with fault tolerance.
 
-**Common sources:**
+```mermaid
+flowchart TD
+    Data["Massive Unstructured / Structured Data\n(Petabytes / Exabytes)"] --> Storage["Distributed Storage\n(Hadoop HDFS / AWS S3 / Azure ADLS)"]
 
-- Social media
-- Sensors and IoT devices
-- Transaction records
-- Videos
-- Logs
+    Storage --> Compute{"Distributed Compute Engine"}
+    Compute -- "Disk-Based Batch\n(Legacy / Slow)" --> HadoopMR["Hadoop MapReduce\nWrites intermediate results to disk"]
+    Compute -- "In-Memory Unified Engine\n(100x Faster)" --> Spark["Apache Spark / PySpark\n(In-memory DAG execution)"]
 
----
-
-## 2. The 4 Vs of Big Data
-
-The core characteristics of Big Data are commonly described using the **4 Vs**:
-
-| V | Meaning | Example |
-|---|---------|---------|
-| 📦 **Volume** | The sheer amount of data | Petabytes or exabytes |
-| ⚡ **Velocity** | The speed at which data is generated and processed | Stock markets, social media feeds, sensors |
-| 🧩 **Variety** | The different types and formats of data | Tables, JSON, images, video |
-| ✅ **Veracity** | The quality and trustworthiness of data | Noise, bias, missing values |
-
-> 💡 Some people add a 5th V: **Value**, the business value extracted from the data.
-
-### 2.1 Volume
-- The **sheer amount of data** being generated.
-- Traditional systems struggle to store and process such huge volumes.
-
-### 2.2 Velocity
-- The **speed** at which data is generated, collected, and processed.
-- Requires systems that can process streaming data quickly.
-
-### 2.3 Variety
-- The **different types and formats** of data:
-  - **Structured**: tables, CSV
-  - **Semi-structured**: JSON, XML
-  - **Unstructured**: text, images, videos, audio
-- Makes data harder to integrate and analyze.
-
-### 2.4 Veracity
-- The **quality, accuracy, and trustworthiness** of the data.
-- Includes issues like noise, bias, missing values, and uncertainty.
-- Poor veracity can lead to wrong insights and bad decisions.
+    Spark --> SparkSQL["Spark SQL\n(DataFrames)"]
+    Spark --> SparkStreaming["Spark Streaming\n(Structured Streaming)"]
+    Spark --> MLLib["MLlib\n(Distributed Machine Learning)"]
+    Spark --> GraphX["GraphX\n(Graph Processing)"]
+```
 
 ---
 
-## 3. Hadoop 🐘
+## 📦 The 5 Vs of Big Data
 
-**Hadoop** is an open-source framework designed to store and process Big Data in a distributed environment across clusters of computers.
-
-### 3.1 Core Components
-
-| Component | Role |
-|-----------|------|
-| **HDFS** (Hadoop Distributed File System) | Stores data across multiple machines in a fault-tolerant way. Breaks large files into blocks (default 128 MB) and distributes them. |
-| **MapReduce** | The original processing engine. **Map** processes and filters data in parallel; **Reduce** aggregates the results. |
-| **YARN** (Yet Another Resource Negotiator) | Manages resources and schedules jobs across the cluster. |
-| **Hadoop Common** | Utilities and libraries needed by the other modules. |
-
-### 3.2 How Hadoop Works
-
-1. Data is stored on **HDFS** (distributed storage).
-2. When a job runs, **MapReduce** breaks the task into smaller subtasks.
-3. Tasks are executed in parallel on different nodes, following the **data locality principle** (process data where it is stored).
-4. Results are combined to produce the final output.
-
-### 3.3 Strengths and Weaknesses
-
-| 👍 Strengths | 👎 Weaknesses |
-|-------------|---------------|
-| Excellent for batch processing of massive datasets | Slow for iterative or real-time processing |
+| V | Dimension | Description | Enterprise Example |
+|---|---|---|---|
+| **Volume** | Scale | The sheer quantity of data (terabytes to petabytes). | Global credit card transactions, clickstream events. |
+| **Velocity** | Speed | The rate at which incoming data is generated and must be processed. | Real-time stock ticker feeds, IoT telematics. |
+| **Variety** | Diversity | Heterogeneous formats: structured, semi-structured, unstructured. | SQL tables, JSON logs, sensor time-series, video feeds. |
+| **Veracity** | Quality | Data reliability, noise, bias, missing records, inconsistencies. | GPS inaccuracies, web scraping duplicates. |
+| **Value** | Business Impact | The actionable commercial insight extracted from raw data. | Algorithmic fraud prevention, customer retention. |
 
 ---
 
-## 4. Apache Spark ⚡
+## 🐘 Hadoop: The Distributed Foundation
 
-**Apache Spark** is a fast, in-memory data processing engine designed for Big Data. It was developed to overcome the limitations of Hadoop MapReduce.
+Apache Hadoop was the first open-source framework to enable fault-tolerant distributed storage and batch computation:
 
-### 4.1 Key Features
+### 1. HDFS (Hadoop Distributed File System)
+- Breaks large files into fixed-size blocks (default: **128 MB**).
+- Replicates each block across multiple nodes (default: **$3\times$ replication factor**) for hardware fault tolerance.
+- **NameNode (Master):** Stores file tree metadata and block locations in RAM.
+- **DataNodes (Workers):** Store the physical data blocks on disk.
 
-- **In-memory computing**: much faster than disk-based MapReduce.
-- **One unified engine** for batch, streaming, machine learning, and SQL workloads.
-- **Rich ecosystem**: Spark SQL, Spark Streaming, MLlib, GraphX, and more.
+### 2. YARN (Yet Another Resource Negotiator)
+- Cluster operating system: manages CPU and RAM resource allocation across worker nodes.
+- **ResourceManager (Global):** Arbitrates cluster compute capacity.
+- **NodeManager (Per-node):** Monitors container CPU/memory usage on individual machines.
 
-### 4.2 Architecture
-
-| Component | Role |
-|-----------|------|
-| **Driver Program** | The main program that coordinates the execution. |
-| **Cluster Manager** | Allocates resources (YARN, Mesos, Kubernetes, or Standalone). |
-| **Executors** | Run on worker nodes and execute tasks. |
-
-### 4.3 Data Abstractions
-
-| Abstraction | Description |
-|-------------|-------------|
-| **RDD** (Resilient Distributed Dataset) | The core data structure: immutable, distributed, fault-tolerant. |
-| **DataFrame / Dataset** | Higher-level structured APIs, recommended for most use cases. |
-
-### 4.4 Execution Model
-
-1. Spark builds a **Directed Acyclic Graph (DAG)** of operations.
-2. It optimizes the execution plan (**lazy evaluation**).
-3. Data is processed in parallel across many executors.
-4. Intermediate results can be kept in memory (**caching**), making iterative algorithms like machine learning very fast.
+### 3. MapReduce (Disk-Bound Batch Processing)
+- **Map:** Filters and transforms data in parallel across nodes where data lives (*Data Locality Principle*).
+- **Shuffle & Sort:** Re-distributes data across network by key.
+- **Reduce:** Aggregates and writes final results back to HDFS disk.
+- *Limitation:* Iterative algorithms (like gradient descent or graph processing) are slow because intermediate states are constantly written to and read from physical disks.
 
 ---
 
-## 5. Hadoop vs Spark ⚖️
+## ⚡ Apache Spark: The In-Memory Revolution
 
-| Aspect      | Hadoop (MapReduce) | Apache Spark                  |
-|-------------|--------------------|-------------------------------|
-| Processing  | Disk-based         | In-memory (can spill to disk) |
-| Speed       | Slower             | 10x–100x faster               |
-| Use case    | Batch processing   | Batch + Streaming + ML        |
-| Ease of use | More complex       | Easier (high-level APIs)      |
-| Real-time   | Not suitable       | Excellent (Spark Streaming)   |
+Apache Spark overcomes MapReduce limitations by keeping intermediate data in **RAM**, achieving up to **$100\times$ faster execution**.
+
+### 1. Core Architecture
+- **Driver Program:** Coordinates execution, creates the `SparkContext` / `SparkSession`, and converts user code into a Directed Acyclic Graph (DAG) of stages.
+- **Cluster Manager:** Allocates cluster resources (YARN, Kubernetes, or Spark Standalone).
+- **Executors:** Worker JVM processes that run tasks and store cached data partitions in RAM.
+
+### 2. Abstractions: RDDs vs. DataFrames
+- **RDD (Resilient Distributed Dataset):** Low-level immutable collection partitioned across cluster nodes.
+- **DataFrame:** Distributed collection organized into named columns (like Pandas/SQL), optimized by the **Catalyst Optimizer** and **Tungsten binary execution engine**.
+
+### 3. Transformations vs. Actions (Lazy Evaluation)
+Spark does not compute anything until an **Action** is called:
+- **Transformations (Lazy):** Build the execution plan without running (`.select()`, `.filter()`, `.groupBy()`, `.map()`).
+- **Actions (Eager):** Trigger the DAG execution and return results to Driver or write to storage (`.count()`, `.collect()`, `.show()`, `.write.parquet()`).
+
+```python
+# PySpark Example Workflow
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName("RideAnalytics").getOrCreate()
+
+# 1. Lazy transformation (reads metadata, doesn't load data yet)
+df = spark.read.parquet("s3://mlops-data/rides.parquet")
+filtered_df = df.filter(df["trip_distance"] > 5.0)
+aggregated_df = filtered_df.groupBy("PULocationID").avg("trip_duration_minutes")
+
+# 2. Action triggers distributed cluster computation
+aggregated_df.show(10)
+```
 
 ---
 
-## 6. Summary 📝
+## ⚖️ Hadoop MapReduce vs. Apache Spark
 
-- **Big Data** is defined by the 4 Vs: Volume, Velocity, Variety, and Veracity.
-- **Hadoop** revolutionized Big Data storage and batch processing.
-- **Spark** improved on it with speed, ease of use, and support for modern workloads such as streaming and ML.
-
----
-
-*Document created as part of learning Big Data technologies.*
+| Feature | Hadoop MapReduce | Apache Spark |
+|---|---|---|
+| **Processing Speed** | Slow (Disk I/O between stages) | **Fast ($10–100\times$ faster due to in-memory DAGs)** |
+| **Primary Memory** | Disk-centric | **RAM-centric (Spills to disk only if needed)** |
+| **API Ease of Use** | Verbose Java boilerplate | **Python (PySpark), SQL, Scala, R** |
+| **Streaming Support** | Batch only | **Native Structured Streaming (sub-second latency)** |
+| **Machine Learning** | Mahout (Slow disk iterations) | **Spark MLlib (Fast in-memory iterative training)** |
+| **Current Role** | Legacy / Deep cold archival | **Modern Big Data Standard** |

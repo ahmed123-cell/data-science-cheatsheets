@@ -1,24 +1,89 @@
-# Supervised Learning
+# 🎯 Supervised Learning
 
-A structured guide to supervised machine learning algorithms.
+A structured guide to supervised machine learning algorithms: models that learn from **labeled data** to predict either a category (**classification**) or a number (**regression**).
 
-## Contents
+<a id="contents"></a>
+## 📚 Contents
 
-- [Linear Regression in Machine Learning 📈](#linear-regression-in-machine-learning-)
-- [Logistic Regression in Machine Learning 📊](#logistic-regression-in-machine-learning-)
-- [K-Nearest Neighbors (KNN) in Machine Learning 👥](#k-nearest-neighbors-knn-in-machine-learning-)
-- [Naive Bayes in Machine Learning 📧](#naive-bayes-in-machine-learning-)
-- [Support Vector Machine (SVM) in Machine Learning ⚔️](#support-vector-machine-svm-in-machine-learning-)
-- [Decision Trees in Machine Learning 🌳](#decision-trees-in-machine-learning-)
-- [Neural Networks in Deep Learning 🧠](#neural-networks-in-deep-learning-)
+1. [Linear Regression 📈](#lr)
+   - [What is Linear Regression? 🤔](#lr-what-is-linear-regression)
+   - [How Does Linear Regression Work? 🔍](#lr-how-does-linear-regression-work)
+   - [The Main Formula 📐](#lr-the-main-formula)
+   - [The Cost Function: Mean Squared Error (MSE) 📉](#lr-the-cost-function-mean-squared-error-mse)
+   - [The Learning Process: Finding the Best Parameters 🧠](#lr-the-learning-process-finding-the-best-parameters)
+   - [Regularization: Preventing Overfitting 🛡️](#lr-regularization-preventing-overfitting)
+   - [Polynomial Regression 📐➡️🔄](#lr-polynomial-regression)
+   - [Quick Comparison](#lr-quick-comparison)
+
+2. [Logistic Regression 📊](#logreg)
+   - [What is Logistic Regression? 🤖](#logreg-what-is-logistic-regression)
+   - [The Sigmoid Function (Core Formula) 📉](#logreg-the-sigmoid-function-core-formula)
+   - [Log Loss Function (Binary Cross-Entropy) 📉](#logreg-log-loss-function-binary-cross-entropy)
+   - [Multinomial Logistic Regression (Multi-Class) 🔢](#logreg-multinomial-logistic-regression-multi-class)
+   - [Softmax Function 🧠](#logreg-softmax-function)
+   - [Training with Gradient Descent](#logreg-training-with-gradient-descent)
+
+3. [K-Nearest Neighbors (KNN) 👥](#knn)
+   - [What is KNN? 🤔](#knn-what-is-knn)
+   - [How Does KNN Work? 🔄](#knn-how-does-knn-work)
+   - [Choosing the Right K ⚖️](#knn-choosing-the-right-k)
+   - [Advantages ✅](#knn-advantages)
+   - [Disadvantages ❌](#knn-disadvantages)
+
+4. [Naive Bayes 📧](#nb)
+   - [What is Naive Bayes? 🤓](#nb-what-is-naive-bayes)
+   - [How Does Naive Bayes Work? 🔍](#nb-how-does-naive-bayes-work)
+   - [Types of Naive Bayes Classifiers 📊](#nb-types-of-naive-bayes-classifiers)
+   - [Training and Prediction Process ⚙️](#nb-training-and-prediction-process)
+   - [Advantages ✅](#nb-advantages)
+   - [Disadvantages ❌](#nb-disadvantages)
+
+5. [Support Vector Machine (SVM) ⚔️](#svm)
+   - [What is Support Vector Machine? 🤖](#svm-what-is-support-vector-machine)
+   - [How Does SVM Work? 🔍](#svm-how-does-svm-work)
+   - [Advantages ✅](#svm-advantages)
+   - [Disadvantages ❌](#svm-disadvantages)
+   - [Support Vector Regression (SVR) 📈](#svm-support-vector-regression-svr)
+
+6. [Decision Trees 🌳](#dt)
+   - [What is a Decision Tree? 🤔](#dt-what-is-a-decision-tree)
+   - [How Does a Decision Tree Work? 🔀](#dt-how-does-a-decision-tree-work)
+   - [Decision Trees for Regression 📈 (Using MSE)](#dt-decision-trees-for-regression-using-mse)
+   - [Decision Trees for Classification 📊 (Entropy & Gini)](#dt-decision-trees-for-classification-entropy-gini)
+   - [Advantages ✅](#dt-advantages)
+   - [Disadvantages ❌](#dt-disadvantages)
+
+7. [Neural Networks 🧠](#nn)
+   - [What is a Neural Network? 🌐](#nn-what-is-a-neural-network)
+   - [How Does a Neural Network Work? 🔄](#nn-how-does-a-neural-network-work)
+   - [Training the Network: Backpropagation 📉](#nn-training-the-network-backpropagation)
+   - [Key Concepts in Deep Learning 🧩](#nn-key-concepts-in-deep-learning)
+   - [Advantages ✅](#nn-advantages)
+   - [Disadvantages ❌](#nn-disadvantages)
+   - [Summary 🎯](#nn-summary)
 
 ---
 
-## Linear Regression in Machine Learning 📈
+## 🧭 Algorithms at a Glance
 
+| # | Algorithm | Task | Core idea | Typical use |
+|---|-----------|------|-----------|-------------|
+| 1 | [Linear Regression](#lr) | Regression | Fit the best straight line (or hyperplane) by minimizing MSE | House prices, sales forecasting |
+| 2 | [Logistic Regression](#logreg) | Classification | Squash a linear score into a probability with sigmoid / softmax | Spam detection, churn prediction |
+| 3 | [K-Nearest Neighbors](#knn) | Classification & regression | Vote or average over the K closest training points | Recommendations, handwriting recognition |
+| 4 | [Naive Bayes](#nb) | Classification | Bayes' theorem with a feature-independence assumption | Text, spam, sentiment analysis |
+| 5 | [Support Vector Machine](#svm) | Classification & regression | Maximum-margin hyperplane, kernel trick for non-linear data | Images, text categorization, bioinformatics |
+| 6 | [Decision Trees](#dt) | Classification & regression | Recursive if-else splits chosen by MSE, entropy, or Gini | Churn, loan approval |
+| 7 | [Neural Networks](#nn) | Classification & regression | Layers of neurons trained with backpropagation | Vision, NLP, speech |
+
+---
+
+<a id="lr"></a>
+## 1. Linear Regression 📈
 
 <img src="images/linear regression.png" alt="Linear Regression" width="600" height="350"/>
 
+<a id="lr-what-is-linear-regression"></a>
 ### What is Linear Regression? 🤔
 
 **Linear Regression** is one of the simplest and most fundamental supervised machine learning algorithms. It is used to predict a **continuous numerical value** (the target or dependent variable) based on one or more **input features** (independent variables).
@@ -32,6 +97,7 @@ The core idea: **Find the best straight line (or hyperplane in higher dimensions
 
 ---
 
+<a id="lr-how-does-linear-regression-work"></a>
 ### How Does Linear Regression Work? 🔍
 
 Linear Regression assumes a **linear relationship** between the input features and the output. It tries to model this relationship using a straight line equation.
@@ -45,6 +111,7 @@ For multiple features (Multiple Linear Regression):
 
 ---
 
+<a id="lr-the-main-formula"></a>
 ### The Main Formula 📐
 
 #### Simple Linear Regression:
@@ -71,6 +138,7 @@ $$
 
 ---
 
+<a id="lr-the-cost-function-mean-squared-error-mse"></a>
 ### The Cost Function: Mean Squared Error (MSE) 📉
 
 To measure how well the line fits the data, we use the **Mean Squared Error (MSE)**.
@@ -94,6 +162,7 @@ The lower the MSE, the better the model fits the data. Our goal during training 
 
 ---
 
+<a id="lr-the-learning-process-finding-the-best-parameters"></a>
 ### The Learning Process: Finding the Best Parameters 🧠
 
 There are two main ways to find the optimal values of $\beta_0, \beta_1, \dots$:
@@ -146,8 +215,7 @@ Where:
 
 ---
 
----
-
+<a id="lr-regularization-preventing-overfitting"></a>
 ### Regularization: Preventing Overfitting 🛡️
 
 **Regularization** is a technique used to reduce model complexity and prevent **overfitting** (when the model learns noise in the training data instead of the real pattern). It does this by adding a **penalty term** to the cost function, which discourages extremely large coefficients.
@@ -221,6 +289,7 @@ $$
 
 ---
 
+<a id="lr-polynomial-regression"></a>
 ### Polynomial Regression 📐➡️🔄
 
 **Polynomial Regression** is an extension of Linear Regression that models **non-linear relationships** by adding polynomial features.
@@ -257,6 +326,7 @@ You can then apply normal Linear Regression (including regularization) on these 
 
 ---
 
+<a id="lr-quick-comparison"></a>
 ### Quick Comparison
 
 | Technique              | Best For                        | Handles Non-linearity | Feature Selection |
@@ -267,12 +337,16 @@ You can then apply normal Linear Regression (including regularization) on these 
 | Ridge (L2)             | Correlated features             | -                     | No                |
 | Elastic Net            | High-dimensional + correlated   | -                     | Yes               |
 
+[↑ Back to contents](#contents)
+
 ---
 
-## Logistic Regression in Machine Learning 📊
+<a id="logreg"></a>
+## 2. Logistic Regression 📊
 
 <img src="images/logistic regression.png" alt="Logistic Regression" width="600" height="350"/>
 
+<a id="logreg-what-is-logistic-regression"></a>
 ### What is Logistic Regression? 🤖
 
 **Logistic Regression** is a supervised machine learning algorithm primarily used for **classification tasks**. While its name contains “Regression”, it is actually a **classification model** that predicts the probability of an instance belonging to a particular class.
@@ -287,6 +361,7 @@ Unlike Linear Regression, which predicts continuous values, Logistic Regression 
 
 ---
 
+<a id="logreg-the-sigmoid-function-core-formula"></a>
 ### The Sigmoid Function (Core Formula) 📉
 
 Logistic Regression uses the **Sigmoid** (logistic) function to squash any real number into a probability range [0, 1].
@@ -308,6 +383,7 @@ The decision boundary is usually at 0.5.
 
 ---
 
+<a id="logreg-log-loss-function-binary-cross-entropy"></a>
 ### Log Loss Function (Binary Cross-Entropy) 📉
 
 To train the model, we minimize the **Log Loss** (also called Binary Cross-Entropy), which penalizes confident wrong predictions more heavily.
@@ -328,6 +404,7 @@ Where:
 
 ---
 
+<a id="logreg-multinomial-logistic-regression-multi-class"></a>
 ### Multinomial Logistic Regression (Multi-Class) 🔢
 
 When you have **more than two classes**, we extend binary Logistic Regression to handle multiple classes.
@@ -352,6 +429,7 @@ When you have **more than two classes**, we extend binary Logistic Regression to
 
 ---
 
+<a id="logreg-softmax-function"></a>
 ### Softmax Function 🧠
 
 For true **multinomial logistic regression**, we use the **Softmax** function to generalize the sigmoid to multiple classes.
@@ -379,20 +457,27 @@ $$
 P(y = k | \mathbf{x}) = \text{Softmax}(z_k)
 $$
 
-Cross-Entropy Loss
-$$ J(w) = \frac{-1}{m} \sum_{i=1}^{m} \sum_{k=1}^{K} y_k^{(i)} \cdot log(\hat{p}_k^{(i)}) $$
+#### Cross-Entropy Loss
+$$
+J(w) = \frac{-1}{m} \sum_{i=1}^{m} \sum_{k=1}^{K} y_k^{(i)} \cdot \log(\hat{p}_k^{(i)})
+$$
 
 ---
 
+<a id="logreg-training-with-gradient-descent"></a>
 ### Training with Gradient Descent
 Just like Linear Regression, we use **Gradient Descent** to minimize the Log Loss (or Cross-Entropy Loss) by updating the coefficients $\beta$.
 
+[↑ Back to contents](#contents)
+
 ---
 
-## K-Nearest Neighbors (KNN) in Machine Learning 👥
+<a id="knn"></a>
+## 3. K-Nearest Neighbors (KNN) 👥
 
 <img src="images/KNN.png" alt="KNN" width="600" height="350"/>
 
+<a id="knn-what-is-knn"></a>
 ### What is KNN? 🤔
 
 **K-Nearest Neighbors (KNN)** is a simple, intuitive, and **non-parametric** supervised learning algorithm used for both **classification** and **regression** tasks.
@@ -408,6 +493,7 @@ It belongs to the family of **instance-based** or **lazy learning** algorithms b
 
 ---
 
+<a id="knn-how-does-knn-work"></a>
 ### How Does KNN Work? 🔄
 
 KNN follows a very straightforward process:
@@ -440,6 +526,7 @@ The most common ways to measure “nearness”:
 
 ---
 
+<a id="knn-choosing-the-right-k"></a>
 ### Choosing the Right K ⚖️
 
 - **Small K** (e.g., K=1): More sensitive to noise → can lead to **overfitting**
@@ -452,6 +539,7 @@ The most common ways to measure “nearness”:
 
 ---
 
+<a id="knn-advantages"></a>
 ### Advantages ✅
 - Very **simple and easy to understand**
 - No assumptions about data distribution (non-parametric)
@@ -459,8 +547,7 @@ The most common ways to measure “nearness”:
 - Can be used for both classification and regression
 - Naturally handles multi-class problems
 
----
-
+<a id="knn-disadvantages"></a>
 ### Disadvantages ❌
 - **Computationally expensive** at prediction time (calculates distance to all points)
 - Sensitive to **irrelevant or unscaled features** (always scale your data!)
@@ -468,12 +555,16 @@ The most common ways to measure “nearness”:
 - Needs a lot of memory (stores all training data)
 - Not good with imbalanced datasets unless modified
 
+[↑ Back to contents](#contents)
+
 ---
 
-## Naive Bayes in Machine Learning 📧
+<a id="nb"></a>
+## 4. Naive Bayes 📧
 
 <img src="images/Naive Bayes.png" alt="Naive Bayes" width="600" height="350"/>
 
+<a id="nb-what-is-naive-bayes"></a>
 ### What is Naive Bayes? 🤓
 
 **Naive Bayes** is a family of simple yet powerful **probabilistic classifiers** based on **Bayes’ Theorem**. Despite its simplicity, it often performs surprisingly well in real-world applications, especially in text-related tasks.
@@ -495,6 +586,7 @@ It is called **"Naive"** because it makes a strong (and often unrealistic) assum
 
 ---
 
+<a id="nb-how-does-naive-bayes-work"></a>
 ### How Does Naive Bayes Work? 🔍
 
 Naive Bayes applies **Bayes’ Theorem** to compute the probability of a class given the features.
@@ -518,6 +610,7 @@ $$
 
 ---
 
+<a id="nb-types-of-naive-bayes-classifiers"></a>
 ### Types of Naive Bayes Classifiers 📊
 
 Different variants are used depending on the type of features:
@@ -556,6 +649,7 @@ An improvement over Multinomial NB that is particularly effective for **imbalanc
 
 ---
 
+<a id="nb-training-and-prediction-process"></a>
 ### Training and Prediction Process ⚙️
 
 1. **Training**:
@@ -568,14 +662,14 @@ An improvement over Multinomial NB that is particularly effective for **imbalanc
 
 ---
 
+<a id="nb-advantages"></a>
 ### Advantages ✅
 - Very fast and scalable
 - Good with missing data
 - Easy to interpret (probabilities)
 - Performs well even when independence assumption is violated
 
----
-
+<a id="nb-disadvantages"></a>
 ### Disadvantages ❌
 - **Strong independence assumption** is rarely true in real data
 - Can be outperformed by more complex models (trees, neural nets)
@@ -586,12 +680,16 @@ $$
 P(x_i | C) = \frac{\text{count}(x_i, C) + \alpha}{\text{count}(C) + \alpha \cdot n}
 $$
 
+[↑ Back to contents](#contents)
+
 ---
 
-## Support Vector Machine (SVM) in Machine Learning ⚔️
+<a id="svm"></a>
+## 5. Support Vector Machine (SVM) ⚔️
 
 <img src="images/SVM.jpg" alt="SVM" width="600" height="350"/>
 
+<a id="svm-what-is-support-vector-machine"></a>
 ### What is Support Vector Machine? 🤖
 
 **Support Vector Machine (SVM)** is a powerful supervised learning algorithm used for both **classification** and **regression** tasks. It is particularly effective in high-dimensional spaces and is known for its strong generalization capabilities.
@@ -607,6 +705,7 @@ The main idea behind SVM is to find the **optimal decision boundary** (a hyperpl
 
 ---
 
+<a id="svm-how-does-svm-work"></a>
 ### How Does SVM Work? 🔍
 
 SVM works by solving an **optimization problem** with the following key concepts:
@@ -626,12 +725,14 @@ SVM works by solving an **optimization problem** with the following key concepts
 
 ---
 
+<a id="svm-advantages"></a>
 ### Advantages ✅
 - Excellent performance in high-dimensional data
 - Robust to overfitting (especially with proper regularization)
 - Works well with small to medium-sized datasets
 - Versatile thanks to different kernel functions
 
+<a id="svm-disadvantages"></a>
 ### Disadvantages ❌
 - Can be slow on very large datasets (training time is higher)
 - Sensitive to choice of kernel and hyperparameters
@@ -640,6 +741,7 @@ SVM works by solving an **optimization problem** with the following key concepts
 
 ---
 
+<a id="svm-support-vector-regression-svr"></a>
 ### Support Vector Regression (SVR) 📈
 
 **Support Vector Regression (SVR)** is the **regression version** of SVM. Instead of finding a hyperplane that separates classes, SVR finds a hyperplane that best fits the data within a certain margin of tolerance.
@@ -656,14 +758,16 @@ SVM works by solving an **optimization problem** with the following key concepts
 
 SVR inherits all the strengths of SVM: it can handle non-linear relationships using kernels and is robust to outliers thanks to the margin-based approach.
 
----
+[↑ Back to contents](#contents)
 
 ---
 
-## Decision Trees in Machine Learning 🌳
+<a id="dt"></a>
+## 6. Decision Trees 🌳
 
 <img src="images/Decision Trees.png" alt="Decision Trees" width="600" height="350"/>
 
+<a id="dt-what-is-a-decision-tree"></a>
 ### What is a Decision Tree? 🤔
 
 **Decision Tree** is a versatile, tree-like supervised learning algorithm that can be used for both **classification** and **regression** tasks. It makes decisions by asking a series of "if-else" questions about the features, splitting the data step by step until it reaches a final prediction.
@@ -683,6 +787,7 @@ Think of it as a flowchart:
 
 ---
 
+<a id="dt-how-does-a-decision-tree-work"></a>
 ### How Does a Decision Tree Work? 🔀
 
 1. **Start at the root node** with the full dataset.
@@ -695,6 +800,7 @@ The algorithm is **greedy** — at each step it chooses the locally best split w
 
 ---
 
+<a id="dt-decision-trees-for-regression-using-mse"></a>
 ### Decision Trees for Regression 📈 (Using MSE)
 
 In regression, the tree predicts a **continuous value**. At each split, it chooses the feature and threshold that **minimizes the Mean Squared Error (MSE)** in the resulting child nodes.
@@ -708,6 +814,7 @@ This creates piecewise constant predictions — the output is constant within ea
 
 ---
 
+<a id="dt-decision-trees-for-classification-entropy-gini"></a>
 ### Decision Trees for Classification 📊 (Entropy & Gini)
 
 In classification, the goal is to create **pure nodes** (nodes where all samples belong to the same class). Two popular criteria are used to measure impurity:
@@ -750,6 +857,7 @@ Gini is often preferred in practice (e.g., in scikit-learn’s default) because 
 
 ---
 
+<a id="dt-advantages"></a>
 ### Advantages ✅
 - Easy to understand and visualize
 - Handles both numerical and categorical data
@@ -757,8 +865,7 @@ Gini is often preferred in practice (e.g., in scikit-learn’s default) because 
 - Can capture non-linear relationships
 - Feature importance can be extracted
 
----
-
+<a id="dt-disadvantages"></a>
 ### Disadvantages ❌
 - Prone to **overfitting** (very deep trees)
 - Unstable — small changes in data can lead to very different trees
@@ -767,13 +874,16 @@ Gini is often preferred in practice (e.g., in scikit-learn’s default) because 
 
 **Tip**: Use **Random Forest** (ensemble of many decision trees) to overcome most of these weaknesses.
 
+[↑ Back to contents](#contents)
 
 ---
 
-## Neural Networks in Deep Learning 🧠
+<a id="nn"></a>
+## 7. Neural Networks 🧠
 
 <img src="images/Neural Networks.webp" alt="Neural Networks" width="600" height="350"/>
 
+<a id="nn-what-is-a-neural-network"></a>
 ### What is a Neural Network? 🌐
 
 A **Neural Network** (also called Artificial Neural Network or ANN) is a computational model inspired by the structure and functioning of the **human brain**. 
@@ -789,6 +899,7 @@ Neural networks excel at tasks where traditional algorithms struggle, such as:
 
 ---
 
+<a id="nn-how-does-a-neural-network-work"></a>
 ### How Does a Neural Network Work? 🔄
 
 A neural network processes data through interconnected **neurons** organized in **layers**.
@@ -818,6 +929,7 @@ Each connection between neurons has a **weight**, and each neuron has a **bias**
 
 ---
 
+<a id="nn-training-the-network-backpropagation"></a>
 ### Training the Network: Backpropagation 📉
 
 This is the core learning process:
@@ -837,6 +949,7 @@ This is the core learning process:
 
 ---
 
+<a id="nn-key-concepts-in-deep-learning"></a>
 ### Key Concepts in Deep Learning 🧩
 
 - **Deep Networks**: More hidden layers allow learning of hierarchical features (edges → shapes → objects in images).
@@ -846,11 +959,13 @@ This is the core learning process:
 
 ---
 
+<a id="nn-advantages"></a>
 ### Advantages ✅
 - Extremely powerful at learning complex, hierarchical patterns
 - Automatic feature extraction (no need for manual engineering)
 - State-of-the-art performance on perceptual tasks (vision, speech, text)
 
+<a id="nn-disadvantages"></a>
 ### Disadvantages ❌
 - Requires large amounts of data
 - Computationally expensive (needs GPUs)
@@ -859,8 +974,11 @@ This is the core learning process:
 
 ---
 
+<a id="nn-summary"></a>
 ### Summary 🎯
 
 **Neural Networks** are powerful function approximators that learn by adjusting millions of weights through forward propagation and backpropagation. When stacked into many layers, they become **Deep Neural Networks**, capable of solving incredibly complex real-world problems and powering modern AI.
 
 They form the backbone of almost all modern deep learning architectures (CNNs, Transformers, etc.).
+
+[↑ Back to contents](#contents)

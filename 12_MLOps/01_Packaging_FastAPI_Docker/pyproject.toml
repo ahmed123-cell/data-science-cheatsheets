@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ride-duration-service"
+version = "0.1.0"
+description = "Production-grade MLOps packaging with FastAPI, Docker, and ONNX Runtime"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "MLOps Practitioner", email = "engineer@mlops.local" }
+]
+keywords = ["mlops", "fastapi", "docker", "onnx", "pydantic", "pytest"]
+dependencies = [
+    "fastapi>=0.110.0",
+    "uvicorn[standard]>=0.28.0",
+    "pydantic>=2.6.0",
+    "pydantic-settings>=2.2.0",
+    "numpy>=1.26.0",
+    "scikit-learn>=1.4.0",
+    "onnxruntime>=1.17.0",
+    "joblib>=1.3.0",
+    "python-json-logger>=2.0.7",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "httpx>=0.27.0",
+    "ruff>=0.3.0",
+    "skl2onnx>=1.16.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = ["E501"]

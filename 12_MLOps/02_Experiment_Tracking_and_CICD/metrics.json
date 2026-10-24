@@ -1,0 +1,6 @@
+{
+  "val_mae": 1.6401,
+  "val_rmse": 2.0551,
+  "val_r2": 0.9538,
+  "n_validation_samples": 2000
+}

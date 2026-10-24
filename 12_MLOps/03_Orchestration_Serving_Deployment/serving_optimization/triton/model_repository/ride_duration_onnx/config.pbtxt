@@ -1,0 +1,39 @@
+# NVIDIA Triton Model Configuration (config.pbtxt)
+# Optimized for dynamic batching and concurrent model execution
+
+name: "ride_duration_onnx"
+platform: "onnxruntime_onnx"
+max_batch_size: 64
+
+# Input Tensor Specification
+input [
+  {
+    name: "float_input"
+    data_type: TYPE_FP32
+    dims: [ 6 ]
+  }
+]
+
+# Output Tensor Specification
+output [
+  {
+    name: "variable"
+    data_type: TYPE_FP32
+    dims: [ 1 ]
+  }
+]
+
+# Hardware Acceleration: Dynamic Batching
+# Aggregates individual incoming gRPC requests up to max_batch_size or max_queue_delay
+dynamic_batching {
+  max_queue_delay_microseconds: 5000
+  preferred_batch_size: [ 8, 16, 32, 64 ]
+}
+
+# Instance Group: Scale multiple model execution instances across GPUs or CPUs
+instance_group [
+  {
+    count: 2
+    kind: KIND_CPU
+  }
+]

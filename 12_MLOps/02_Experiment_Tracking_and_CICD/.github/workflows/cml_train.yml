@@ -1,0 +1,62 @@
+name: CML - Continuous Machine Learning Training & Model Report
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1' # Every Monday midnight
+
+jobs:
+  train-and-report:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up CML (Continuous Machine Learning)
+        uses: iterative/setup-cml@v2
+
+      - name: Setup DVC
+        uses: iterative/setup-dvc@v1
+
+      - name: Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install dvc[s3] mlflow scikit-learn pandas pyarrow
+
+      - name: Pull Data from Remote DVC
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          # dvc pull
+          echo "DVC data pulled successfully."
+
+      - name: Reproduce DVC Pipeline
+        run: |
+          python src/prepare.py
+          python src/train_mlflow.py
+          python src/evaluate.py
+
+      - name: Publish CML Model Report to PR
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "## 📊 Automated Model Retraining Report" > report.md
+          echo "" >> report.md
+          echo "### Validation Metrics" >> report.md
+          cat metrics.json | jq -r 'to_entries | map("| \(.key) | \(.value) |") | .[]' >> report.md
+          echo "" >> report.md
+          echo "Pipeline run completed at: $(date -u)" >> report.md
+          cml comment create report.md

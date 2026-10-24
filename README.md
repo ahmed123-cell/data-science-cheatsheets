@@ -1,122 +1,154 @@
 <div align="center">
 
-# 📊 Data Science Cheat Sheet
+# 📊 Data Science & Machine Learning Engineering Master Reference
 
-### A structured, all-in-one reference for Data Science — from Python fundamentals to Machine Learning & MLOps
+### A structured, production-grade reference library spanning Python fundamentals, mathematics, data manipulation, visualization, SQL, data engineering, Power BI, big data, machine learning, PyTorch deep learning, commercial business domains, and end-to-end MLOps.
 
-[![Typing SVG](https://readme-typing-svg.demolab.com/?lines=Learn.+Reference.+Build.;Python+%7C+SQL+%7C+ML+%7C+Data+Viz;Your+Data+Science+Roadmap+%F0%9F%9A%80&font=Fira%20Code&center=true&width=500&height=45&color=58A6FF&vCenter=true&size=20)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com/?lines=Learn.+Reference.+Build.;Python+%7C+SQL+%7C+ML+%7C+Deep+Learning+%7C+MLOps;Your+Complete+Data+Science+Roadmap+%F0%9F%9A%80&font=Fira%20Code&center=true&width=550&height=45&color=58A6FF&vCenter=true&size=19)](https://git.io/typing-svg)
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
-![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Apache Airflow](https://img.shields.io/badge/Airflow-017CEE?style=for-the-badge&logo=apacheairflow&logoColor=white)
+![dbt](https://img.shields.io/badge/dbt-FF694B?style=for-the-badge&logo=dbt&logoColor=white)
+![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=for-the-badge&logo=mlflow&logoColor=white)
 ![PowerBI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
 
 </div>
 
 ---
 
-## 📖 About This Repo
+## 📖 About This Repository
 
-This repository is my **personal Data Science reference library** — a growing collection of notes, cheat sheets, and hands-on notebooks covering everything from Python basics to Machine Learning, MLOps, and the core Business concepts that give data its real-world context.
+This repository is a **comprehensive personal Data Science & AI engineering knowledge base** designed to eliminate fragmented learning and repetitive web searches. Every module is self-contained with its own detailed `README.md`, verified Python scripts, interactive Jupyter notebooks, unit/integration test suites, and Dockerized infrastructure.
 
-> 🎯 **Goal:** Build a single, well-organized place to quickly look things up, refresh concepts, and reference working code — instead of re-searching the same things over and over.
-
-Every folder is self-contained with its own `README.md`, so you can jump straight to the topic you need.
+> 🎯 **Core Philosophy:** *Theory $\to$ Applied Implementation $\to$ Production Engineering $\to$ Commercial Business Impact.*
 
 ---
 
-## 🗺️ Roadmap
+## 🗺️ Master Curriculum Roadmap
 
-A suggested learning path through this repo, from foundations to advanced topics:
-
-```
- 1️⃣  Python Fundamentals      →  Learn the language itself
- 2️⃣  Mathematics               →  Build the theoretical foundation (Calculus, Linear Algebra, Statistics)
- 3️⃣  Data Manipulation         →  NumPy & Pandas for working with data
- 4️⃣  Data Visualization        →  Matplotlib & Seaborn to see your data
- 5️⃣  Web Scraping & APIs       →  Collect your own data from the web
- 6️⃣  Data Engineering          →  Store, move, and prepare data at scale
- 7️⃣  Big Data                  →  Work with data beyond a single machine
- 8️⃣  Machine Learning          →  Build & interpret predictive models
- 9️⃣  Deep Learning             →  Neural networks & advanced modeling
- 🔟  MLOps                     →  Deploy, monitor & maintain ML in production
- 📊  Power BI                  →  Turn insights into dashboards & reports
- 💼  Business                  →  Understand the business, sales, marketing & finance context behind the data
-```
+The recommended progression from zero programming knowledge to shipping autonomous machine learning pipelines in production:
 
 ```mermaid
-flowchart LR
-    A[🐍 Python Fundamentals] --> B[📐 Mathematics]
-    B --> C[🧮 Data Manipulation]
-    C --> D[📈 Data Visualization]
-    D --> E[🌐 Web Scraping & APIs]
-    E --> F[🏗️ Data Engineering]
-    F --> G[🗄️ Big Data]
-    G --> H[🤖 Machine Learning]
-    H --> I[🧠 Deep Learning]
-    I --> J[⚙️ MLOps]
-    D --> K[📊 Power BI]
-    A --> L[💼 Business]
+flowchart TD
+    M01["01. Python Basics\n(Syntax, OOP, StdLib, Testing)"] --> M02["02. Mathematics\n(Linear Algebra, Calculus, Stats)"]
+    M02 --> M03["03. Data Manipulation\n(NumPy & Pandas)"]
+    M03 --> M04["04. Data Visualization\n(Matplotlib & Seaborn)"]
+    M04 --> M05["05. SQL & Databases\n(Relational Modeling, Window Functions)"]
+    M05 --> M06["06. Data Engineering\n(Apache Airflow & dbt ELT)"]
+    M06 --> M07["07. Power BI\n(Data Modeling & DAX Dashboards)"]
+    M06 --> M08["08. Big Data\n(Hadoop HDFS, Spark & PySpark)"]
+    M03 --> M09["09. Machine Learning\n(Scikit-Learn & Forecasting)"]
+    M09 --> M10["10. Deep Learning\n(PyTorch, CNNs, ViT, Modular Scripts)"]
+    M09 --> M11["11. Business Domains\n(Finance, Marketing, Sales Metrics)"]
+    M10 --> M12["12. MLOps Engineering\n(FastAPI, Docker, MLflow, Airflow, Prometheus, LLMOps)"]
 ```
 
 ---
 
-## 📂 Folder Overview
+## 📂 Modules & Syllabus Directory
 
-| Folder | Description |
-|---|---|
-| 🐍 **Python Fundamentals** | Core Python concepts — syntax, data types, functions, OOP, iterators, generators, decorators, type hinting, and common errors. |
-| 📐 **Mathematics** | The math behind data science — Calculus, Linear Algebra, Statistics & Probability, and Advanced Statistics. |
-| 🧮 **Data Manipulation** | Working with data using **NumPy** (arrays) and **Pandas** (DataFrames). |
-| 📈 **Data Visualization** | Creating charts and plots with **Matplotlib** and **Seaborn**. |
-| 🌐 **Web Scraping & APIs** | Collecting data from the web using **Requests** and **BeautifulSoup**. |
-| 🏗️ **Data Engineering** | Building data pipelines, working with databases (e.g. PostgreSQL), and preparing data for analysis. |
-| 🗄️ **Big Data** | Concepts and tools for handling large-scale datasets. |
-| 🤖 **Machine Learning** | Building, evaluating, and interpreting ML models with **scikit-learn** and **SHAP**. |
-| 🧠 **Deep Learning** | Neural networks and deep learning fundamentals. |
-| ⚙️ **MLOps** | Deploying, monitoring, and maintaining machine learning models in production. |
-| 📊 **Power BI** | Building interactive dashboards and reports, plus DAX formulas. |
-| 💼 **Business** | Key concepts and definitions in **Business**, **Sales**, **Marketing**, and **Finance** — the context needed to turn data insights into business decisions. |
-
----
-
-## 🎥 Featured Learning Resources
-
-| Topic | Resource |
-|---|---|
-| 🐍 Python | [Introduction to Python — W3Schools](https://www.w3schools.com/python/python_intro.asp) · [Python Tutorial (Video)](https://youtu.be/mvZHDpCHphk?si=bgw9KSeN3p3nOuij) |
-| 🧮 NumPy | [NumPy Tutorial — W3Schools](https://www.w3schools.com/python/numpy/default.asp) |
-| 🧮 Pandas | [Pandas Tutorial — GeeksforGeeks](https://www.geeksforgeeks.org/pandas/pandas-tutorial/) |
-| 🏗️ PostgreSQL | [PostgreSQL Tutorial — W3Schools](https://www.w3schools.com/postgresql/index.php) · [PostgreSQL Tutorial (Video)](https://youtu.be/us1rf2iynOY?si=jyRr8H6H7HFgJqYk) |
-| 🤖 Machine Learning | [Machine Learning Tutorial — GeeksforGeeks](https://www.geeksforgeeks.org/machine-learning/machine-learning/) |
-| 📊 Power BI | [Power BI Tutorial (Video)](https://youtu.be/FwjaHCVNBWA?si=NKhn0iHWZx90tG9W) · [Power BI Tutorial (Video)](https://youtu.be/WdCltDhmRLo?si=IYPBUdzFWyIdLNnt) |
-
-> 💡 Each folder's own `README.md` contains more focused resources and a breakdown of its files.
+| Module | Focus & Core Technologies | Key Contents |
+|---|---|---|
+| [**01_Python_Basics**](./01_Python_Basics) | Core Python 3, Data Types, Functions, OOP, Testing | 10 annotated scripts covering syntax, built-ins, closures, decorators, generators, OOP classes, dunders, standard library, `unittest`, and SQLite. |
+| [**02_Mathematics**](./02_Mathematics) | Linear Algebra, Calculus, Probability, Advanced Statistics | 4 dedicated branches: Matrix operations, SVD/PCA, optimization derivatives, distributions, skewness, ANOVA, and hypothesis testing. |
+| [**03_Data_Manipulation**](./03_Data_Manipulation) | Vectorized Computing (`NumPy`) & DataFrames (`Pandas`) | 17 reference scripts: array broadcasting, ufuncs, `.loc`/`.iloc` filtering, data cleaning, GroupBy, pivot/melt, relational merges, and time series. |
+| [**04_Data_Visualization**](./04_Data_Visualization) | Exploratory Data Analysis with `Matplotlib` & `Seaborn` | Interactive plotting tutorials covering statistical distributions, box/violin plots, heatmaps, regression plots, and chart selection guidelines. |
+| [**05_SQL**](./05_SQL) | Relational Databases, PostgreSQL, Query Optimization | 600-line master SQL tutorial script ([`sql_tutorial.sql`](./05_SQL/sql_tutorial.sql)) covering CTEs, window functions (`ROW_NUMBER`, `LEAD/LAG`), joins, indexing, and ACID. |
+| [**06_Data_Engineering**](./06_Data_Engineering) | Modern ELT Pipelines, Orchestration & Modeling | Hands-on Dockerized **Apache Airflow** cluster and a complete **dbt** analytics engineering project with DuckDB, staging models, seeds, and marts. |
+| [**07_PowerBI**](./07_PowerBI) | Business Intelligence, Interactive Visuals & DAX | Sample production `.pbix` report ([`Visuals.pbix`](./07_PowerBI/Visuals/Visuals.pbix)), star-schema modeling, and a comprehensive DAX measure formula reference. |
+| [**08_Big_Data**](./08_Big_Data) | Distributed Computing, Hadoop Ecosystem & Apache Spark | The 5 Vs, HDFS fault tolerance, YARN resource negotiation, Spark in-memory DAG engine, lazy evaluation, RDDs vs. DataFrames, and PySpark workflows. |
+| [**09_Machine_Learning**](./09_Machine_Learning) | Scikit-Learn Algorithms & Time Series Forecasting | Supervised, unsupervised, and ensemble methods (Random Forest, XGBoost) with applied notebooks, plus complete ARIMA, SARIMA, and Prophet forecasting. |
+| [**10_Deep_Learning**](./10_Deep_Learning) | Modern Deep Learning with `PyTorch` | 9 hands-on notebooks following Daniel Bourke's curriculum: Tensors, custom datasets, CNNs (TinyVGG), modular scripts (`going_modular`), Transfer Learning, and Vision Transformers (ViT). |
+| [**11_Business**](./11_Business) | Commercial Domain Knowledge & Unit Economics | Strategic guides covering **Finance** (EBITDA, Runway, Margins), **Marketing** (CAC, CLV, Churn, Funnels), **Sales** (Velocity, Pipelines), and a retail startup case study. |
+| [**12_MLOps**](./12_MLOps) | Production Model Deployment, Monitoring & LLMOps | 4 production-grade modules based on the MLOps Masterclass: FastAPI REST APIs, multi-stage Docker, DVC & MLflow, Airflow DAGs, Triton/vLLM serving, Prometheus/Grafana, Langfuse, and RAGAS. |
 
 ---
 
-## ✅ How to Use This Repo
+## 🛠️ Global Tech Stack
 
-1. Pick a topic from the **Roadmap** or **Folder Overview** above.
-2. Open that folder's `README.md` for a breakdown of what's inside.
-3. Run the notebooks/scripts locally (most require `pip install` + Jupyter — see each folder's README for exact setup steps).
-4. Use it as a **reference**, not a course — jump to whatever you need, whenever you need it.
+```
+Language:             Python 3.10+
+Numerical & Data:     NumPy, Pandas, SciPy, Statsmodels, DuckDB
+Plotting & BI:        Matplotlib, Seaborn, Power BI (DAX)
+Relational & Big:     PostgreSQL, SQLite, Apache Spark (PySpark), Hadoop HDFS
+Data Engineering:     Apache Airflow, dbt-core
+Machine Learning:     Scikit-Learn, XGBoost, LightGBM, Prophet, SHAP
+Deep Learning:        PyTorch, Torchvision, TensorBoard
+MLOps & Serving:      FastAPI, Docker, Docker Compose, MLflow, DVC, BentoML, NVIDIA Triton, vLLM
+Observability:        Prometheus, Grafana, Evidently AI, Langfuse, RAGAS
+Code Quality & CI/CD: Ruff, Pre-Commit, Terraform, GitHub Actions, Pytest
+```
 
 ---
 
-## 🤝 Using AI as a Learning Companion
+## 💻 Getting Started
 
-You don't need to memorize everything in here. Use AI tools like **ChatGPT** or **Claude** to:
-- Explain any function, parameter, or concept in more depth.
-- Debug code or clarify error messages.
-- Suggest related concepts worth exploring next.
+### 1. Clone the Repository
+```bash
+git clone https://github.com/ahmed123-cell/data-science-cheatsheets.git
+cd data-science-cheatsheets
+```
+
+### 2. Set Up a Virtual Environment
+```bash
+python -m venv .venv
+# Windows (PowerShell)
+.\.venv\Scripts\Activate.ps1
+# Linux / macOS
+source .venv/bin/activate
+```
+
+### 3. Navigate to Any Specific Topic
+Each module is completely self-contained. For example, to run the **MLOps Inference Service**:
+```bash
+cd 12_MLOps/01_Packaging_FastAPI_Docker
+pip install -e .
+python src/app.py
+```
+Or to run the **PyTorch Deep Learning Modular Trainer**:
+```bash
+cd 10_Deep_Learning
+python going_modular/going_modular/train.py --num_epochs 5
+```
+Or to run the **Data Engineering dbt Pipeline**:
+```bash
+cd 06_Data_Engineering/dbt/dbt_project
+dbt run
+dbt test
+```
 
 ---
 
-<div align="center">
+## 📜 License & Acknowledgments
 
-### ⭐ If this repo helps you, consider giving it a star!
+This reference repository is built for personal mastery and public knowledge sharing across the data science community.  
+Special acknowledgments to:
+* **Eng. Aya Nasser Salama** & *MLOps MENA Community* for the MLOps curriculum.
+* **Daniel Bourke** (*learnpytorch.io*) for the PyTorch Deep Learning curriculum.
+* **DataTalks.Club** for open-source engineering alignment.
 
-</div>
+---
+
+## 💡 A Note on Learning
+
+> You don't need to memorize everything in this repository.  
+> The goal is to know **where to look** and **how to think** — not to store everything in your head.
+>
+> If you're ever stuck on a concept, a line of code, or an error:
+> - Ask **[ChatGPT](https://chat.openai.com/)** or **[Claude](https://claude.ai/)** to explain it, debug it, or give you an example.
+> - Use these AI tools as your always-available pair programmer and explainer.
+>
+> The best engineers aren't the ones who remember the most — they're the ones who know **how to find the answer**.
+
+---
+
+## ⭐ Support This Reference
+
+If this repository saved you time, helped you learn, or became part of your workflow —  
+**please give it a star on GitHub!** It helps others discover it and keeps the momentum going. 🚀
+
+[![GitHub stars](https://img.shields.io/github/stars/ahmed123-cell/data-science-cheatsheets?style=social)](https://github.com/ahmed123-cell/data-science-cheatsheets)

@@ -1,0 +1,38 @@
+artifact_path: file:E:/Data Science/Technical Folder/12_MLOps/02_Experiment_Tracking_and_CICD/mlruns/1/models/m-69639173802d4053b82af06dad233afb/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict
+    python_version: 3.13.0
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.9.0
+    skops_trusted_types: null
+is_signature_from_type_hint: false
+mlflow_version: 3.15.1
+model_id: m-69639173802d4053b82af06dad233afb
+model_size_bytes: 23813
+model_uuid: m-69639173802d4053b82af06dad233afb
+prompts: null
+run_id: de9b61547283491297e794da5c4146e9
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "long", "name": "PULocationID", "required": true}, {"type": "long",
+    "name": "DOLocationID", "required": true}, {"type": "double", "name": "trip_distance",
+    "required": true}, {"type": "long", "name": "passenger_count", "required": true},
+    {"type": "long", "name": "hour_of_day", "required": true}, {"type": "long", "name":
+    "day_of_week", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2026-10-24 11:16:57.761630'

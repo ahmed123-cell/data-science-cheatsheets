@@ -1,0 +1,24 @@
+# MLOps Pipeline Parameters (params.yaml)
+# Controlled and tracked by DVC for reproducible pipelines
+
+prepare:
+  raw_data_path: "data/raw/rides_raw.csv"
+  processed_train_path: "data/processed/train.parquet"
+  processed_val_path: "data/processed/val.parquet"
+  val_ratio: 0.2
+  random_seed: 42
+  min_trip_distance: 0.1
+  max_trip_distance: 100.0
+
+train:
+  model_type: "ridge"  # options: "ridge", "random_forest", "linear"
+  alpha: 1.5
+  fit_intercept: true
+  n_estimators: 100    # used if random_forest
+  max_depth: 10        # used if random_forest
+  experiment_name: "nyc-ride-duration-prediction"
+  registered_model_name: "RideDurationRegressor"
+
+evaluate:
+  metrics_output_path: "metrics.json"
+  target_max_mae: 3.5  # Acceptance threshold for model promotion to Staging

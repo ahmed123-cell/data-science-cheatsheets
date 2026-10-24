@@ -1,0 +1,31 @@
+# Ruff Linter & Formatter Configuration (ruff.toml)
+# Replaces Flake8, Black, isort, and pyupgrade in a single high-speed Rust tool
+
+line-length = 88
+target-version = "py310"
+
+[lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort imports sorting
+    "N",   # pep8-naming conventions
+    "UP",  # pyupgrade modern syntax
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+]
+
+ignore = [
+    "E501",  # line too long (handled by formatter)
+    "B008",  # do not perform function calls in argument defaults (FastAPI Depends)
+]
+
+[lint.isort]
+known-first-party = ["src"]
+
+[format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"

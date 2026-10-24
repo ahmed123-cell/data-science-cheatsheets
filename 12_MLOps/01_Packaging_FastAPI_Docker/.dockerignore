@@ -1,0 +1,45 @@
+# Git and IDE files
+.git/
+.gitignore
+.vscode/
+.idea/
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Testing and coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Local notebooks and temp files
+*.ipynb_checkpoints
+*.log
+tmp/
